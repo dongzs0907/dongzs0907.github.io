@@ -1,0 +1,141 @@
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,viewport-fit=cover">
+		<title></title>
+		<style type="text/css">
+			* {
+				padding: 0;
+				margin: 0;
+			}
+
+			html,
+			body {
+				width: 100%;
+				height: 100%;
+				background-color: rgba(0, 0, 0, 0.5);
+				display: flex;
+				align-items: center;
+				justify-content: center;
+			}
+
+			.box {
+				height: 424px;
+				width: 288px;
+				margin-top: -10%;
+				/* 
+            display: table-cell;
+            vertical-align: middle; */
+			}
+
+			img {
+				height: 230px;
+				width: 288px;
+				border-radius: 12px 12px 0 0;
+				display: block;
+			}
+
+			.foot {
+				height: 194px;
+				background-color: #F0F8FF;
+				border-radius: 0 0 12px 12px;
+				text-align: center;
+				/*position: relative; */
+			}
+
+			.button-box {
+				width: 240px;
+				height: 56px;
+				background-color: #34d5d3;
+				border-radius: 12px;
+				margin-top: 10px;
+				font-size: 18px;
+				font-weight: 700;
+				color: aliceblue;
+				font-family: Avenir, Avenir-Heavy;
+				text-align: center;
+				/* outline: none; */
+				border: 0 solid #F0F8FF;
+				/* line-height: 20px; */
+			}
+
+			.title {
+				font-size: 16px;
+				font-weight: DemiBold;
+				font-family: AvenirNext, AvenirNext-DemiBold;
+				text-align: center;
+				padding-top: 10px;
+			}
+
+			.msg {
+				font-size: 14px;
+				font-weight: 400;
+				/* display: inline-block; */
+				font-family: AvenirNext, AvenirNext-Regular;
+				padding-top: 10px;
+			}
+
+			.button-close {
+				width: 36px;
+				height: 36px;
+				position: absolute;
+				margin-left: 0;
+				margin-top: 65%;
+			}
+		</style>
+
+		<script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.js"></script>
+
+	</head>
+
+	<body>
+
+		<div class="box">
+			<img class="head" src="img/an_alert_banner@2x.png" />
+
+			<div class="foot">
+				<p class="title">Our New Prank App</p>
+				<p class="msg">
+					40+ prank tools and funny things!</br> Including these awesome sounds:</br>
+					Alarm, Fart, Smoke, Police etc.
+				</p>
+				<button class="button-box">Try It Now</button>
+			</div>
+		</div>
+		<img class="button-close" src="img/an_alert_close@2x.png">
+
+
+		<script type="text/javascript">
+			$(".button-box").click(function() {
+
+				// try it now 按钮点击事件
+				window.webkit.messageHandlers.pushAppStore.postMessage("")
+			})
+			$(".button-close").click(function() {
+				// 关闭按钮点击时间
+				window.webkit.messageHandlers.close.postMessage("")
+			})
+
+
+			function loadProperties(lang) {
+				$.i18n.properties({
+					name: 'strings', //属性文件名     命名格式： 文件名_国家代号.properties
+					path: 'i18n/', //注意这里路径是你属性文件的所在文件夹
+					mode: 'map',
+					language: lang, //这就是国家代号 name+language刚好组成属性文件名：strings+zh -> strings_zh.properties
+					callback: function() {
+						$("[data-locale]").each(function() {
+							console.log($(this).data("locale"));
+							$(this).html($.i18n.prop($(this).data("locale")));
+
+						});
+					}
+				});
+			}
+			loadProperties('zh');
+		</script>
+	</body>
+
+
+</html>
